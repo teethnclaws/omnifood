@@ -1,0 +1,223 @@
+/* You want to stop the experimental live preview and open the html directly with live preview or from localhost so that you can use the dev tools. As you scale the page down you will establish what starts to look odd and adjust it within the queries so that the elements of the page scale with
+each suitable breakpoint */
+
+
+
+/* Big tablet to 1200px widths smaller than 1140px rows. 
+This 1200 vs 1140 allows there to be a little space around the bordering text of the nav bar for example when we scale down. */
+@media only screen and (max-width: 1200px) {
+    
+    .hero-text-box {
+    /* copy and pasted these elements from the style.css so that we can adjust them for responsiveness */
+        /* we don't want the width to be fixed anymore, so we changed it to 100% */
+        width: 100%;
+        /* we want a little padding between the text & border: 0 top & bottom, 2% left & right */
+        padding: 0 2%;
+    }
+    
+    /* this will apply to all rows */
+    .row {
+        /* setting the same scale of padding as the hero text box class so that everything assigned a row class
+        will have 2% padding on the left & right as the page changes in size */
+        padding: 0 2%;
+    }
+    
+}
+
+
+
+
+/* from small tablet to small tablet: from 768 to 1023px 
+for iPad for portrait mode as landscape has 1024px */
+@media only screen and (max-width: 1023px) {
+
+    body {
+        /* initially we assigned a font-size on the css as a universal 20px, & assigned %'s to it throughout the project.
+        This allows us the ability to assign a px here & it still apply & adjust per the assigned percentages */
+        font-size: 18px;
+    }
+    
+    section {
+        /* top & bottom, left & right */
+        padding: 60px 0;
+    }
+    
+    .long-copy {
+        /* changed the width so the text in this class will fill the space as the screen scales down */
+        width: 80%;
+        /* Now that the width has been increased, we need to update the margin-left from 15% (+15) = 30% to 10% (+10) = 20% */
+        margin-left: 10%;
+        /* thus this section's changes total out to 100% */
+    }
+    
+
+/* the goal here is to increase the image size while shrinking the white space in the How It Works section */
+    .steps-box {
+        margin-top: 10px; /* original style 30px */
+    }
+    
+    .steps-box:last-child {margin-top: 10px;}
+    
+    .works-step {
+        margin-bottom: 40px; /* original style 50px */
+    }
+    
+    .works-step:last-of-type {
+        margin-bottom: 60px; /* original style 80px */
+    }
+    
+    .app-screen {
+        width: 50%; /*original style 40% */
+    }
+    
+/* Reducing the width of the icons & font size in the We're Currently in These Cities section */
+    .icon-small {
+        width: 17px; /* original style 30px */
+        margin-right: 5px; /* original style 10px */
+    }
+    
+    .city-feature {font-size: 90%;}
+    
+/* changing the widths & margins in the Start Eating Healthy Today section so the text continues to line up */
+    .plan-box {
+        width: 100%;
+        margin-left: 0;
+    }
+/* reducing the font-size, which was originally styled at 300% */    
+    .plan-price {font-size: 250%;}
+    
+/* increase the width of the Contact Form class to reduce white space. Changed from 80 to 90% after we added the map element */
+    .contact-form {width: 90%;}
+    
+}
+
+
+
+
+/* for 'larger' small phones & tablets with screens that are less than or equal to 767px, e.g. 481 to 767px;
+typical ipad width is 768px */
+@media only screen and (max-width: 767px) {
+
+/*further reducing the overall font-size from 18px to 16px & overall padding in sections from 60px to 30px */
+    body {font-size: 16px;}
+    
+    section {padding: 30px 0;}
+    
+/* updating the media setting to increase the padding for the row & hero text box classes in the header */
+    .row,
+    .hero-text-box {
+        /* top & bottom, left & right: was 0 2px */
+        padding: 0 4%;
+    }
+/* the columns will no longer be side-by-side, instead stacking atop one another. Thus they will fill 100% of the width */
+    .col {
+        width: 100%;
+        /* pulled the initial margin specs 'margin: 1% 0 1% 1.6%;' from grid.css. This needs to be adjusted as
+        some of the columns are not lining up when the screen scales down. */
+        margin: 0 0 4% 0;
+        /* Removed margins, other than the 4% bottom to achieve a cleaner appearance of the Start Eating Healthy section */
+    }
+    
+/* at this point we're going to hide the navigation in the header & in the next lesson build a mobile one using jQuery. */
+    .main-nav {display: none;}
+	
+	.mobile-nav-icon {
+		display: inline-block;
+	}
+	
+	.main-nav {
+		float: left;
+		margin-top: 35px;
+		margin-left: 25px;
+	}
+	
+	.main-nav li {
+		/* this will stack the links within the navigation once the screen is below 767px */
+		display: block;
+	}
+	
+	.main-nav li a:link,
+	.main-nav li a:visited {
+		display: block;
+		border: 0;/* as we cannot hover on mobile device */
+		padding: 10px 0;/* adding padding to the top and bottom of listed nav links */
+		font-size: 100%;/* increasing the font size for the smaller screen */
+	}
+
+/* adjusting these parts of the sticky nav in order to aid the responsiveness of the naviation in the last section of the js lesson */
+	.sticky .main-nav {margin-top: 10px;}
+	
+	.sticky .main-nav li a:link,
+	.sticky .main-nav li a:visited {padding: 10px 0;}
+	
+	.sticky .mobile-nav-icon {margin-top: 10px;}
+	.sticky .mobile-nav-icon i {color: #555555;}
+	
+    
+/* adjusting the font-size of the header elements */
+    h1 {font-size: 180%;}
+    h2 {font-size: 150%;}
+    
+/* further adjusting the following in order to narrow down the white space */
+    .long-copy {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .app-screen {width: 40%;}
+    
+    /* this selector rule will isolate changes only to the first of the two steps-box classes we created */
+    .steps-box:first-child {
+	/* text-align applies to all inline and inline block elements including images */ 
+        text-align: center;
+    }
+    
+    .works-step div {
+        height: 40px; /* was 55px */
+        width: 40px; /* was 55px */
+        padding: 4px; /* was 5px */
+        margin-right: 15px; /* was 25px */
+        font-size: 120%;
+    }
+    
+    .works-step {margin-bottom: 20px;} /* was 40px */
+    .works-step:last-of-type {margin-bottom: 20px;} /* was 60px */
+    
+	/* added the map and form mobile media query here, so that the map will stack atop the form when on a mobile screen */
+	
+	.map-box {
+		width: 100%;
+		height: auto;
+		position: relative;
+}
+
+	.map {
+		width: 100%;
+		height: 300px;
+		position: relative;
+	}
+
+	.form-box {
+		position: relative;
+		width: 100%;
+		height: auto;
+		padding: 30px 0;
+	}
+	
+	
+}
+
+
+/* for small phones with screens that are less than or equal to 480px e.g. 0 to 480px */
+@media only screen and (max-width: 480px) {
+    
+/* further narrowing the padding & increasing the size of the form to remove excess white space */
+    section {
+        padding: 25px 0; /* was 30px 0 */
+    }
+    
+    .contact-form {
+        width: 100%;
+    }
+    
+}

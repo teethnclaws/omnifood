@@ -1,0 +1,816 @@
+/* In the end, to ensure browser compatability, I highlighted all & used Auto Prefix Selection. This tool creates the necessary prefixes,
+if needed in the css. */
+
+
+/* --------------------------- Basic Set Up -----------------------------*/
+
+/* best to strip out all margins and padding initially */
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	background-color: #FFF;
+	color: #222222;
+	font-family: 'Lato', 'Arial', sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+	text-rendering: optimizeLegibility;
+    /* this was added during the media query creation phase as overflow started to become an issue */
+    overflow-x: hidden;
+}
+
+/* created clearfix in lecture 46 to deal with clearing the floats in the meal-showcase ul items so that the 
+How It Works header would have proper white space between it and the image gallery */
+.clearfix {zoom:1}
+.clearfix:after {
+	content: '.';
+	clear: both;
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+/* -------------------------------- Header -----------------------------*/
+
+header {
+/* sets up and darkens background image, in this case with 0.7 or 70% transparency, without needing a separate overlay */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url(img/hero.jpg);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(img/hero.jpg);
+/* fills the screen, than reduces the image to fit within the viewport while also positioning it center */
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	/* this locks the background image in place like parallax */
+	background-attachment: fixed;
+}
+
+
+
+/* -------------------------------- Buttons -----------------------------*/
+
+/* common button style; both buttons have this section in common psuedo classes of link and visited were added to the button classesso that when they are clicked they will always look the same */
+.btn:link, 
+.btn:visited,
+/* the input button was added in this section so that all of the buttons would look alike. 
+It had to be added to the hover & active effects as well */
+input[type=submit] {
+/* changing the a element from an inline element to an inline block */
+	display: inline-block;
+/* top and bottom, left and right */
+	padding: 10px 30px;
+	font-weight: 300;
+/* removing underline from button link */
+	text-decoration: none;
+/* create rounded-edge buttons, set a high border radius */
+	border-radius: 200px;
+/* creating a transition property for the buttons so that the color change is gradual */
+	-webkit-transition: background-color 0.2s, border 0.2s, color 0.2s;
+	transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+/* individual button styles - including psuedo classes of link and visited */
+
+.btn-full:link,
+.btn-full:visited,
+input[type=submit] {
+	background-color: #e67e22;
+/* because of the box-model of content + padding + border, the two buttons will appear to be the same size, thus I have to apply the same border to the smaller of the two to adjust for that */
+	border: 1px solid #e67e22;
+	color: #FFF;
+	margin-right: 15px;
+}
+
+.btn-ghost:link,
+.btn-ghost:visited {
+	border: 1px solid #e67e22;
+/* button text color was originally white, applied under .btn */
+	color: #e67e22;
+}
+
+/* we can also define how the buttons will look when they are hovered over and active */
+.btn:hover,
+.btn:active,
+input[type=submit]:hover,
+input[type=submit]:active {
+/* this color will appear when the button is hovered over or active (we used the 0to255.com tool */
+	background-color: #924d10;
+}
+
+/* these are the changes that occur when the button is hovered over or active */
+.btn-full:hover,
+.btn-full:active,
+input[type=submit] {
+	border: 1px solid #e67e22;
+}
+
+.btn-ghost:hover,
+.btn-ghost:active {
+	border: 1px solid #e67e22;
+	color: #FFF;
+}
+
+/* --------------------------- Reusable Components --------------------------------*/
+
+/* our content will be in rows; the only value defined in pixels */
+.row {
+	max-width: 1140px;
+/* top & bottom 0, left & right auto */	
+	margin: 0 auto;
+}
+
+section {
+/* top & bottom, left & right; using padding in lieu of margin because there will be colors used later */
+	padding: 80px 0;
+}
+
+/* we DON'T want to make any changes in our grid.css; 
+so in order to add style to the columns we add box as an additional class */
+.box {
+	padding: 1%;/*to separate the columns a little */
+}
+
+
+
+/* -------------------------------- Paragraphs ------------------------------------*/
+
+.long-copy {
+	line-height: 145%;
+	width: 70%;
+/* with limiting the width to 70%, in this case, the content will not be centered
+this we assign a margin-left of 15% as that is half of the remaining 30% */
+	margin-left: 15%;
+}
+
+.box p {
+	font-size: 90%;
+	line-height: 145%;
+}
+
+
+/* -------------------------------- Icons ----------------------------------------*/
+
+/* we added icon-big as an additional class to the icons in order to style them.
+You can style icons the same way as text */
+.icon-big {
+	font-size: 350%;
+	display: block;
+	color: #e67e22;
+	margin-bottom: 10px;
+}
+
+
+
+/* -------------------------------- Headings -------------------------------------*/
+
+/* we edit the headings so that the common shared elements are together, 
+while the individual ones are assigned to each */
+
+h1, h2, h3 {
+/* When we use very large text, you should decrease the font weight */
+	font-weight: 300;
+/* changing the text to uppercase, and place in a little spacing */
+	text-transform: uppercase;
+}
+
+h1 {
+	margin-top: 0;
+	margin-bottom: 20px;
+	color: #FFF;
+/* we want the size to be relative; example: 200% aka 40px since we set the overall html font to 20px */
+	font-size: 240%;
+	word-spacing: 4px;
+	letter-spacing: 1px;
+}
+
+h2 {
+	font-size: 180%;
+	word-spacing: 2px;
+	text-align: center;
+	margin-bottom: 30px;
+	letter-spacing: 1px;
+}
+
+h2:after {
+	display: block;
+	height: 2px;
+	background-color: #e67e22;
+/* the content with a space is required for the :after */
+	content: " ";
+	width: 100px;
+/* top & bottom, left & right */
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+h3 {
+	font-size: 110%;
+	margin-bottom: 15px;
+}
+
+/* -------------------------------- Navigation -----------------------------------*/
+
+.hero-text-box {
+/* vertically and horizontally centering the contents of this box */
+	position: absolute;
+	width: 1140px;
+	top: 50%;
+	left: 50%;
+/* translate the element's half of it's width and height */
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.logo {
+	height: 100px;
+	width: auto;
+	float: left;
+	margin-top: 20px;
+}
+
+.logo-black {
+    display: none;/* hiding the black logo */
+    height: 50px;
+	width: auto;
+	float: left;
+	margin: 5px 0;/* assigning 5px to the top & bottom */
+}
+
+.main-nav {
+	float: right;
+/* none removes the bullet points on the list */
+	list-style: none;
+	margin-top: 55px;
+}
+
+.main-nav li {
+/* we make them inline-block so that they are side by side */
+	display: inline-block;
+	margin-left: 40px;
+}
+
+/* adding link and visited ensures the links will look the same no matter what state it's in */
+.main-nav li a:link,
+.main-nav li a:visited {
+/* top and bottom, left and right padding */
+	padding: 8px 0;
+	color: #FFF;
+	text-decoration: none;
+	text-transform: uppercase;
+/* 18px/20px(current px default) = 0.9 or 90% */
+	font-size: 90%;	
+	border-bottom: 2px solid transparent;
+	-webkit-transition: border-bottom 0.2s;
+	transition: border-bottom 0.2s;
+}
+
+/* adding hover and active ensures the links will look the same no matter what state it's in */
+.main-nav li a:hover,
+.main-nav li a:active {
+	border-bottom: 2px solid #e67e22;
+}
+
+/* Mobile Navigation Icon */
+.mobile-nav-icon {
+	float: right;
+	margin-top: 30px;
+	cursor: pointer;/* using a pointer because we didn't define and href to the a attribute for this menu */
+	display: none;
+}
+
+.mobile-nav-icon i {
+	font-size: 200%;
+	color: #FFFFFF;
+}
+
+.ion-navicon-round {
+	
+}
+
+/*creating sticky navigation via css + jQuery*/
+
+.sticky {
+    position: fixed; /* stays put */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(250, 250, 250, 0.98); /* ctrl + E for edit */
+    -webkit-box-shadow: 0 2px 2px #EFEFEF;
+    box-shadow: 0 2px 2px #EFEFEF;/* x-axis horizontal, y-axis vertical, blur, color */
+	z-index: 9999; /* assigns the max allowed; this defines the vertical stacking of elements. This means this sticky element will
+	appear above all others, including stacking atop images instead of blurring behind them when scrolling */
+    
+}
+
+
+.sticky .main-nav {margin-top: 18px;}/* changing the size of the margin for the sticky class version */
+
+.sticky .main-nav li a:link,
+.sticky .main-nav li a:visited {
+	padding: 16px 0;/* increasing the spacing between the nav headings & the orange underline, we increase the padding */
+	color: #555;
+}
+
+.sticky .logo {display: none;}/* hiding the white logo */
+.sticky .logo-black {display: block;}/* showing the black logo */
+
+
+
+
+
+/* ---------------------------Features--------------------------------------*/
+
+.section-features .long-copy {
+	/* isolating where we want more white space between the paragraph & the columned features */
+	margin-bottom: 30px;
+}
+
+
+/* -------------------------- Meals ------------------------------------------ */
+
+.section-meals {
+	/* removes excess white space between the section-features and the section-meals images */
+	padding: 0;
+}
+
+.meals-showcase {
+	list-style: none;
+	width: 100%;
+}
+
+.meals-showcase li {
+	display: block;
+	/* placing them side by side */
+	float: left;
+	/* the width is 25% because I have 4 li items in each list */
+	width: 25%;
+}
+
+.meal-photo {
+	/* keeps the same width as its parent element this class is contained in */
+	width: 100%;
+	/* removes whatever margin is created in the field */
+	margin: 0;
+	overflow: hidden;
+	/* added a black background in the parent class of the meal-photo img so we can make the image appear
+darker with an opacity of 70% */
+	background-color: #000000;
+}
+
+.meal-photo img {
+	opacity: 0.7; /* 70% */
+	/* keeps the same width as its parent element this class is contained in */
+	width: 100%;
+	height: auto;
+	/* we scale up from 100% to 115% in order to set the base effect for the transform in :hover */
+	-webkit-transform: scale(1.15);
+	transform: scale(1.15);
+	/* this makes the scale effect appear smoother + added opacity transition later in lesson */
+	-webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+	transition: opacity 0.5s, -webkit-transform 0.5s;
+	transition: transform 0.5s, opacity 0.5s;
+	transition: transform 0.5s, opacity 0.5s, -webkit-transform 0.5s;
+}
+
+.meal-photo img:hover {
+	/* returning the opacity to 100% */
+	opacity: 1;
+	/* means when we hover, the image will shrink from 115% to 103%. 103% vs 100% so we don't
+see a white space appear below the pictures as they scale	*/
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
+}
+
+/* ------------------------- How it Works (responsive section with %'s) ---------------------------- */
+
+.section-steps {
+	background-color: #F4F4F4;
+}
+
+.steps-box {
+    margin-top: 30px;
+}
+
+/* this selector rule will isolate changes only to the first of the two steps-box classes we created */
+.steps-box:first-child {
+	/* text-align applies to all inline and inline block elements including images */ 
+	text-align: right;
+	padding-right: 3%;
+}
+
+/* this selector rule will isolate changes only the last of the steps-box classes we created, 
+in this case the 2nd one as we only created two */
+.steps-box:last-child {
+    text-align: left;
+	padding-left: 3%;
+	margin-top: 70px;
+}
+
+.app-screen {
+	width: 40%;
+}
+
+.works-step {
+	margin-bottom: 50px;
+}
+
+.works-step:last-of-type {
+	/* while the other worksteps have 50px margins, the last one will have 80px */
+	margin-bottom: 80px;
+}
+
+
+/* this selector isolates the div, with the numbers in them, so we can style those specifically */
+.works-step div {
+	color: #e67e22;
+	border: 2px solid #e67e22;
+	display: inline-block;
+	/* creating a circle & centering number */
+	border-radius: 50%;
+	height: 55px;
+	width: 55px;
+	text-align: center;
+	padding: 5px;
+	float: left;
+	font-size: 150%;
+	margin-right: 25px;
+}
+
+/* removes orange border-bottom from city-feature links below, though I could have
+called those .city-feature a, etc. and likely had better specificity */
+.btn-app:link,
+.btn-app:visited {
+	border: 0;
+}
+
+.btn-app img {
+	/* making both images the same size with an assigned height and an auto width */
+	height: 50px;
+	width: auto;
+	margin-right: 10px; 
+}
+
+/* ---------------------------- Cities Section -------------------------*/
+
+.box img {
+	/* assigning a width the complete size of the box it is in & set the height to auto */
+	width: 100%;
+	height: auto;
+	margin-bottom: 15px;
+}
+
+.city-feature {
+	margin-bottom: 5px;
+}
+
+.icon-small {
+	/* so I can assign a width */
+	display: inline-block;
+	width: 30px;
+	text-align: center;
+	color: #e67e22;
+	font-size: 120%;
+	margin-right: 10px;
+	
+	/* how to align text and icons together */
+	line-height: 120%;
+	vertical-align: middle;
+	margin-top: -5px;
+}
+
+/*----------------------------------- Links -----------------------------------*/
+
+/* I considered calling this .city-feature a etc.. in order to create specificity */
+a:link, a:visited {
+	text-decoration: none;
+	color: #e67e22;
+	padding-bottom: 1px;
+	border-bottom: 1px solid #e67e22;
+	/* allows for a slight delay in the change when hovering over this section */
+	-webkit-transition: border-bottom 0.3s, color 0.3s;
+	transition: border-bottom 0.3s, color 0.3s;
+}
+
+a:hover, a:active {
+	color: #924d10;
+	border-bottom: 1px solid transparent;
+}
+
+
+/*------------------------------- Testimonials -----------------------------------*/
+.section-testimonials {
+	/* applying a background image with linear opacity */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.9))), url(img/back-customers.jpg);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url(img/back-customers.jpg);
+	/* cover the full width of the browser */
+	background-size: cover;
+	color: #FFFFFF;
+	/* this locks the background image in place like parallax */
+	background-attachment: fixed;
+}
+
+
+blockquote {
+	/* creating a space between each of the three testimonials */
+	padding: 2%;
+	/* we can apply this style because we defined it in our google fonts when we linked to them */
+	font-style: italic;
+	line-height: 145%;
+	/* the child blockquote:before has a position of absolute, therefore this has to be defined as relative */
+	position: relative;
+	/* creating a little space between the title and the testimonials */
+	margin-top: 40px;
+}
+
+/* what we want to appear before the text */
+blockquote:before {
+	/* to place text using css I had to use an ISO glyph */
+	content: "\201C";
+	font-size: 500%;
+	display: block;
+	/* define top and left attribute for the quote while in the block */
+	position: absolute;/* the parent, in this case blockquote, has to be relative for this to work*/
+	
+	/* adjusting the placement of the quotes symbol */
+	top: -5px;
+	left: -5px;
+}
+
+cite {
+	font-size: 90%;
+	margin-top: 25px;
+	/* we add display block to create a break between the blockquote and the cite + image */
+	display: block;
+}
+
+cite img {
+	height: 45px;
+	border-radius: 50%;
+	margin-right: 10px;
+	/* this aligns the cite text with the image */
+	vertical-align: middle;
+}
+
+/*------------------------------- Sign Up Pricing Plans -----------------------------------*/
+
+.section-plans {
+	background-color: #F4F4F4;
+}
+
+/* placed inside the columns */
+.plan-box {
+	background-color: #FFFFFF;
+	border-radius: 5px;
+	width: 90%;
+	/* half of the remaining 10% of the parent width, as we assigned this section 90% */
+	margin-left: 5%;
+	/* creating box-shadow, first value x-axis, then y-axis, blur, and color */
+	-webkit-box-shadow: 0 2px 2px #dddddd;
+	box-shadow: 0 2px 2px #dddddd;
+}
+
+.plan-box div {
+	padding: 15px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.plan-box div:first-child {
+	/* creating a subtle background */
+	background-color: #fcfcfc;
+	/* reassigning the border-radius we lost in this section */
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.plan-box div:last-child {
+	/* centering the buttons */
+	text-align: center;
+	border: 0;
+}
+
+.plan-price {
+	font-size: 300%;
+	margin-bottom: 10px;
+	/* changed font-weight from 100 to 300, as 100 was just too light */
+	font-weight: 300;
+	color: #e67e22;
+}
+
+.plan-price span {
+	/* span allows us to style the element within the paragraph easier */
+	/* this span is a child of the plan-price, therefore the aforementioned class will influence it */
+	font-size: 30%;
+	font-weight: 300;
+}
+
+.plan-price-meal {
+	font-size: 80%;
+}
+
+.plan-box ul {
+	list-style: none;
+}
+
+.plan-box ul li {
+	/* top, bottom, then left and right */
+	padding: 5px 0;
+}
+
+/*------------------------------- Contact Form -----------------------------------*/
+
+.contact-form {
+	/* after adding the map to form, I needed to increase the width of the contact-form from 60% to 90% */
+	width: 90%;
+	/* centering the entire form left & right within its parent element */
+	margin: 0 auto;
+}
+
+/* isolating the input type in [] allows us to key on those specific fields to apply the following styles 
+which fixes the off-set clickbox alongside newsletter */
+input[type=text], input[type=email], select, textarea {
+	width: 100%;
+	padding: 7px;
+	border-radius: 3px;
+	border: 1px solid #cccccc;
+}
+
+textarea {
+	height: 100px;
+}
+
+input[type=checkbox] {
+	margin: 10px 5px 10px 0;
+}
+
+*:focus {
+	/* removed the blue focus outlines from all of the field elements */
+	outline: none;
+}
+
+.map-box {
+/* the parent container */
+	width: 100%;
+	/* had to increase from 560px to 630px in order to accomidate PHP form alerts */
+	height: 630px;
+	position: relative;
+}
+
+.map {
+/* contains the map itself */
+	width: 100%;
+	/* had to increase from 560px to 630px in order to accomidate PHP form alerts on the form section */
+	height: 630px;
+	/* stacking elements; the overlapping element with the higher z-index will be seen first */
+	position: relative;
+	z-index: 0;
+}
+
+/* map-box is the parent container to this declaration */
+.form-box {
+	position: absolute;
+	/* creates a half-form half-map split */
+	width: 50%;
+	/* placing it to the top right within the container */
+	top: 0;
+	right: 0;
+	background-color: rgba(255, 255, 255, 0.8);
+	/* stacking elements; the overlapping element with the higher z-index will be seen first */
+	z-index: 10;
+	/* had to increase from 560px to 630px in order to accomidate PHP form alerts on the form section */
+	height: 630px;
+	padding-top: 40px;
+}
+
+
+/* ----------------------------- PHP Form Alerts ------------------------ */
+.form-messages {
+	width: 70%;
+	/* centering */
+	margin: 0 auto;
+	padding: 10px;
+	border-radius: 3px;
+	margin-bottom: 20px;
+	color: #FFFFFF;
+}
+
+.success {
+	background-color: rgba(14, 101, 3, 0.6);
+}
+
+.error {
+	background-color: rgba(181, 23, 23, 0.6);
+}
+
+
+/* ------------------------------ FOOTER ---------------------------- */
+
+footer {
+    background-color: #333;
+    /* in brackets, you have to use Ctrl + E in order to engage quick edit/color picker */
+    padding: 50px;
+    font-size: 80%;
+}
+
+.footer-nav {
+    list-style: none;
+    float: left;    
+}
+
+.social-links {
+    list-style: none;
+    float: right;
+}
+
+.footer-nav li,
+.social-links li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+/* last-child influences the last item in the li for each class listed */
+.footer-nav li:last-child,
+.social-links li:last-child {
+    margin-right: 0;
+} 
+
+.footer-nav li a:link,
+.footer-nav li a:visited,
+.social-links li a:link,
+.social-links li a:visited {
+    text-decoration: none;
+    border: 0;
+    color: #888;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.footer-nav li a:hover,
+.footer-nav li a:active {
+    color: #DDD;
+}
+
+.social-links li a:link,
+.social-links li a:visited {
+    font-size: 160%;
+}
+
+.ion-social-facebook,
+.ion-social-twitter,
+.ion-social-googleplus,
+.ion-social-instagram {
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+
+.ion-social-facebook:hover {
+    color: #3b5998;
+}
+
+.ion-social-twitter:hover {
+    color: #55acee;
+}
+
+.ion-social-googleplus:hover {
+    color: #dd4b39;
+}
+
+.ion-social-instagram:hover {
+    color: #f2198e;
+}
+
+footer p {
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/*----------------------Animations-------------------------*/
+/* download animate.css and include it in the vendors css + add it to the stylesheet on the html. 
+Note: these animations can work without the jquery by just adding the classes to the html. */
+
+/* assigned desired css and then auto-prefixed this section */
+
+.js--wp-1, 
+.js--wp-2, 
+.js--wp-3 {
+	opacity: 0; /* disappear */
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s; /* setting timing for effects */
+}
+
+.js--wp-4 {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s; /* setting timing for effects */
+}
+
+.js--wp-1 .animated,
+.js--wp-2 .animated,
+.js--wp-3 .animated {
+	opacity: 1; /* reappear */
+}
